@@ -1,0 +1,27 @@
+Sources/Melding/MeldingCommand.swift
+  c4f4b6dbe90ae8ab 85-88
+Sources/Melding/OutputFormatter.swift
+  c4f4b6dbe90ae8ab 39-44,58,69
+Sources/Melding/NotificationManager.swift
+  c4f4b6dbe90ae8ab 186-187,215-216,304
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "42a90a5f258a69915833bc981de2a987c2477ead",
+  "prompts": {
+    "c4f4b6dbe90ae8ab": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "unknown",
+        "model": "unknown"
+      },
+      "human_author": "ElKidd",
+      "messages": [],
+      "total_additions": 17,
+      "total_deletions": 9,
+      "accepted_lines": 17,
+      "overriden_lines": 0
+    }
+  }
+}

@@ -48,17 +48,21 @@ ZIP_SHA256=$(shasum -a 256 "$ZIP_FILE" | awk '{print $1}')
 
 # GitHub Release (commit + tag + push after build succeeds)
 TAG="v$VERSION"
-TOKEN=$(gh auth token --user elkidd)
+CURRENT_GH_USER=$(gh api user --jq .login 2>/dev/null || echo "unknown")
+echo "==> Switching to elkidd GitHub account..."
+gh auth switch --user elkidd
 echo "==> Committing and pushing tag $TAG..."
 git -C "$PROJECT_DIR" add "$VERSION_FILE"
 git -C "$PROJECT_DIR" commit -m "🔖 bump version to $VERSION"
-git -C "$PROJECT_DIR" push "https://elkidd:$TOKEN@github.com/elkidd/melding.git" master
+git -C "$PROJECT_DIR" push origin master
 git -C "$PROJECT_DIR" tag "$TAG"
-git -C "$PROJECT_DIR" push "https://elkidd:$TOKEN@github.com/elkidd/melding.git" "$TAG"
-GITHUB_TOKEN=$TOKEN gh release create "$TAG" "$ZIP_FILE" \
+git -C "$PROJECT_DIR" push origin "$TAG"
+gh release create "$TAG" "$ZIP_FILE" \
     --repo "elkidd/melding" \
     --title "$VERSION" \
     --generate-notes
+echo "==> Switching back to $CURRENT_GH_USER..."
+gh auth switch --user "$CURRENT_GH_USER"
 
 echo ""
 echo "==> Done!"

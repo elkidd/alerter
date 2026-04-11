@@ -1,0 +1,23 @@
+Sources/Melding/NotificationManager.swift
+  c4f4b6dbe90ae8ab 12-13,79-93,121,263
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "c2f5f1189c5111cfe15aad0a271640a9dace5f02",
+  "prompts": {
+    "c4f4b6dbe90ae8ab": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "unknown",
+        "model": "unknown"
+      },
+      "human_author": "ElKidd",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 11,
+      "accepted_lines": 33,
+      "overriden_lines": 0
+    }
+  }
+}

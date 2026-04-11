@@ -51,6 +51,7 @@ TAG="v$VERSION"
 CURRENT_GH_USER=$(gh api user --jq .login 2>/dev/null || echo "unknown")
 echo "==> Switching to elkidd GitHub account..."
 gh auth switch --user elkidd
+gh auth setup-git
 echo "==> Committing and pushing tag $TAG..."
 git -C "$PROJECT_DIR" add "$VERSION_FILE"
 git -C "$PROJECT_DIR" commit -m "🔖 bump version to $VERSION"

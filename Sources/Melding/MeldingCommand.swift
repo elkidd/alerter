@@ -5,7 +5,7 @@ struct MeldingCommand: ParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "melding",
         abstract: "A command-line tool to send macOS user notifications.",
-        version: "1.0.0"
+        version: "1.0.1"
     )
 
     // MARK: - Required (at least one)

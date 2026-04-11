@@ -141,6 +141,8 @@ The formula in [elkidd/homebrew-tap](https://github.com/elkidd/homebrew-tap) mus
 
 melding is a fork of [vjeantet/alerter](https://github.com/vjeantet/alerter). The original used `NSUserNotification` private APIs which crash on macOS 26+. This fork migrates to `UNUserNotificationCenter` and packages the binary as a proper `.app` bundle (required by Apple's notification framework).
 
+The name comes from the Dutch/German *melden* — to announce, to report — and the English *melding*, a blending of two things: the terminal and the notification system.
+
 ---
 
 ## License

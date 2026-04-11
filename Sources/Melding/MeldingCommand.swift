@@ -82,6 +82,10 @@ struct MeldingCommand: ParsableCommand {
             throw ValidationError("At least one of --message, --remove, or --list is required.")
         }
 
+        if actions != nil && reply != nil {
+            throw ValidationError("--actions and --reply cannot be combined.")
+        }
+
         if delay < 0 {
             throw ValidationError("--delay must be a non-negative integer.")
         }

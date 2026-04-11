@@ -183,8 +183,8 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
             done = true
         }
-        // Spin the run loop to let the async callback fire before we return
-        while !done {
+        let deadline = Date(timeIntervalSinceNow: 5)
+        while !done && Date() < deadline {
             RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.05))
         }
     }
@@ -212,7 +212,8 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             }
             done = true
         }
-        while !done {
+        let deadline = Date(timeIntervalSinceNow: 5)
+        while !done && Date() < deadline {
             RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.05))
         }
 
@@ -300,6 +301,7 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     private func loadImage(from path: String) -> NSImage? {
         let url: URL
         if let parsed = URL(string: path), let scheme = parsed.scheme, !scheme.isEmpty {
+            guard scheme == "file" else { return nil } // remote URLs not supported
             url = parsed
         } else {
             url = URL(fileURLWithPath: path)

@@ -18,8 +18,6 @@ VERSION="$MAJOR.$MINOR.$((PATCH + 1))"
 
 echo "==> Bumping version $CURRENT_VERSION → $VERSION"
 sed -i '' "s/version: \"$CURRENT_VERSION\"/version: \"$VERSION\"/" "$VERSION_FILE"
-git -C "$PROJECT_DIR" add "$VERSION_FILE"
-git -C "$PROJECT_DIR" commit -m "🔖 bump version to $VERSION"
 
 # Clean dist
 rm -rf "$DIST_DIR"
@@ -48,10 +46,12 @@ echo "==> Creating zip..."
 cd "$DIST_DIR" && mkdir -p "$ZIP_NAME" && cp -r "$PRODUCT_NAME.app" "$ZIP_NAME/" && zip -r "$ZIP_FILE" "$ZIP_NAME" && rm -rf "$ZIP_NAME" && cd "$PROJECT_DIR"
 ZIP_SHA256=$(shasum -a 256 "$ZIP_FILE" | awk '{print $1}')
 
-# GitHub Release
+# GitHub Release (commit + tag + push after build succeeds)
 TAG="v$VERSION"
 TOKEN=$(gh auth token --user elkidd)
-echo "==> Pushing commits and tag $TAG..."
+echo "==> Committing and pushing tag $TAG..."
+git -C "$PROJECT_DIR" add "$VERSION_FILE"
+git -C "$PROJECT_DIR" commit -m "🔖 bump version to $VERSION"
 git -C "$PROJECT_DIR" push "https://elkidd:$TOKEN@github.com/elkidd/melding.git" master
 git -C "$PROJECT_DIR" tag "$TAG"
 git -C "$PROJECT_DIR" push "https://elkidd:$TOKEN@github.com/elkidd/melding.git" "$TAG"

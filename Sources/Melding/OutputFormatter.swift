@@ -31,15 +31,17 @@ struct OutputFormatter {
     private static func formatText(event: ActivationEvent) -> String {
         switch event.type {
         case .closed:
-            if let value = event.value, !value.isEmpty {
-                return value
-            }
             return "@CLOSED"
         case .timeout:
             return "@TIMEOUT"
         case .contentsClicked:
             return "@CONTENTCLICKED"
-        case .actionClicked, .replied:
+        case .replied:
+            if let value = event.value, !value.isEmpty {
+                return value
+            }
+            return "@REPLIED"
+        case .actionClicked:
             if let value = event.value, !value.isEmpty {
                 return value
             }
@@ -53,7 +55,7 @@ struct OutputFormatter {
         let activationType: String
         let activationAt: String
         var activationValue: String?
-        var activationValueIndex: String?
+        var activationValueIndex: Int?
         var deliveredAt: String?
     }
 
@@ -64,7 +66,7 @@ struct OutputFormatter {
         )
         output.activationValue = event.value
         if let index = event.valueIndex {
-            output.activationValueIndex = "\(index)"
+            output.activationValueIndex = index
         }
         if let delivered = event.deliveredAt {
             output.deliveredAt = dateFormatter.string(from: delivered)

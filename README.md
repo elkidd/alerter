@@ -122,7 +122,7 @@ At a minimum, you must specify `--message`, `--remove`, or `--list`.
 | `@TIMEOUT` | Notification timed out |
 | `@CONTENTCLICKED` | User clicked the notification body |
 | `@ACTIONCLICKED` | User clicked the default action button |
-| `@REPLIED` | User submitted a reply (reply-type alerts) |
+| `@REPLIED` | User submitted a reply (plain text output is the reply text itself) |
 | `<ACTION>` | User clicked a named action button (e.g. `Yes`, `No`) |
 
 ---
